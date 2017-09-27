@@ -1,5 +1,5 @@
 # OAI-PMH Repository #
-> This fork has been modified for the Southwest Harbor Public Library to interface with DPLA via the Maine State Library.
+> This fork has been modified for the Southwest Harbor Public Library to interface with the Maine State Library for the purpose of ingesting content into DPLA.
 
 A plugin for Omeka.
 
