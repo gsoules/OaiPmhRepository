@@ -1,4 +1,6 @@
 # OAI-PMH Repository #
+> This fork has been modified for the Southwest Harbor Public Library to interface with DPLA via the Maine State Library.
+
 A plugin for Omeka.
 
 This plugin implements an Open Archives Initiative Protocol for Metadata
