@@ -570,9 +570,8 @@ class OaiPmhRepository_ResponseGenerator extends OaiPmhRepository_OaiXmlGenerato
      */
     public function appendHeader($parentElement, $item)
     {
-        $headerData['identifier'] =
+        $headerData['identifier'] = 
             OaiPmhRepository_OaiIdentifier::itemToOaiId($item->id);
-
         $headerData['datestamp'] = OaiPmhRepository_Date::dbToUtc($item->modified);
 
         $collection = $item->getCollection();
@@ -596,8 +595,8 @@ class OaiPmhRepository_ResponseGenerator extends OaiPmhRepository_OaiXmlGenerato
      */
     public function appendRecord($parentElement, $item, $metadataPrefix)
     {
-        $restrictions = $item->getElementTexts('Item Type Metadata', 'Restrictions');
-        if (count($restrictions) >= 1)
+        $item = apply_filters('oai_pmh_append_record', $item);
+        if ($item == null)
             return;
 
         $record = $this->document->createElement('record');
