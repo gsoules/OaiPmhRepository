@@ -48,14 +48,14 @@ class OaiPmhRepository_Metadata_OaiDc implements OaiPmhRepository_Metadata_Forma
         $oai_dc->declareSchemaLocation(self::METADATA_NAMESPACE, self::METADATA_SCHEMA);
 
         $dcElementNames = array(
-            'title', 'creator', 'subject', 'description', 'publisher', 'date', 'type', 'identifier', 'rights', 'location');
+            'title', 'creator', 'subject', 'description', 'publisher', 'date', 'type', 'identifier', 'rights', 'place');
 
         $oai_dc->appendNewElement('dc:contributor', 'Southwest Harbor Public Library');
 
         foreach ($dcElementNames as $elementName)
         {
             $upperName = Inflector::camelize($elementName);
-            $setName = $elementName == 'location' ? 'Item Type Metadata' : 'Dublin Core';
+            $setName = $elementName == 'place' ? 'Item Type Metadata' : 'Dublin Core';
             $dcElements = $item->getElementTexts($setName, $upperName);
             $text = empty($dcElements) ? '' : $dcElements[0]->text;
 
@@ -69,8 +69,8 @@ class OaiPmhRepository_Metadata_OaiDc implements OaiPmhRepository_Metadata_Forma
                 $this->appendDateMetadata($oai_dc, $text);
             elseif ($elementName == 'description')
                 $this->appendDescriptionMetadata($oai_dc, $text);
-            elseif ($elementName == 'location')
-                $this->appendLocationMetadata($oai_dc, $item, $text);
+            elseif ($elementName == 'place')
+                $this->appendPlaceMetadata($oai_dc, $item, $text);
             else
             {
                 foreach ($dcElements as $elementText)
@@ -106,7 +106,7 @@ class OaiPmhRepository_Metadata_OaiDc implements OaiPmhRepository_Metadata_Forma
         }
     }
 
-    protected function appendLocationMetadata($oai_dc, $item, $text)
+    protected function appendPlaceMetadata($oai_dc, $item, $text)
     {
         $elements = $item->getElementTexts('Item Type Metadata', 'State');
         $state = count($elements) >= 1 ? $elements[0]->text : '';
